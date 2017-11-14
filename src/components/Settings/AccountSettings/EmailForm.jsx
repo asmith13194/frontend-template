@@ -17,9 +17,9 @@ class AccountSettingsEmailForm extends Component {
     this.state = {};
   }
 
-  componentWillUnmount(){
-    this.props.resetAccountSettingsState();
-  }
+  // componentWillUnmount(){
+  //   this.props.resetAccountSettingsState();
+  // }
 
   render() {
     return (
@@ -50,7 +50,7 @@ class AccountSettingsEmailForm extends Component {
 
       :
 
-      JSON.parse(localStorage.getItem('user')).info.email
+      'Email'
     );
   }
 }

@@ -18,7 +18,7 @@ class Landing extends Component {
 
         <Nav />
 
-        <div className='content-full'>
+        <div className='box content'>
 
           <h2 style={css.title}>Welcome!</h2>
 
@@ -26,11 +26,11 @@ class Landing extends Component {
 
             <LoginButton label={'Get Started'}/>
 
-            <LoginForm />
-
-            <SignupForm />
-
           </div>
+
+          <LoginForm />
+
+          <SignupForm />
 
         </div>
 

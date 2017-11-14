@@ -7,6 +7,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import ContentFilter from 'material-ui/svg-icons/content/filter-list';
+import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import {
   changeLoginViewState,
   changeSignupViewState, } from '../../actions/actions.js';
@@ -19,9 +20,8 @@ class NavMenu extends Component {
 
   render() {
     return (
-      <IconMenu
-        style={css.navmenu}
-        iconButtonElement={<IconButton><ContentFilter /></IconButton>}
+      <IconMenu style={css.navmenu}
+        iconButtonElement={<IconButton style={css.navmenu}><ContentFilter /></IconButton>}
         anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
       >
@@ -40,7 +40,8 @@ class NavMenu extends Component {
 
             <MenuItem
               containerElement={ <Link to="/settings/account" /> }
-              primaryText="Settings" />
+              primaryText="Settings"
+            />
 
             <MenuItem
               containerElement={ <Link to="/" /> }

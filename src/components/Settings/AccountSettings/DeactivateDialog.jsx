@@ -20,9 +20,9 @@ class AccountSettingsNameForm extends Component {
     this.state = {};
   }
 
-  componentWillUnmount(){
-    this.props.resetAccountSettingsState();
-  }
+  // componentWillUnmount(){
+  //   this.props.resetAccountSettingsState();
+  // }
 
   render() {
     const submitChange = () => {

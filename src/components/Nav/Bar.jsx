@@ -11,9 +11,9 @@ class Nav extends Component {
 
   render() {
     return (
-      <div className='nav' style={css.container}>
+      <div className='box header' style={css.container}>
 
-        <img style={css.navlogo} src={ logo } alt='logo' />
+          <img style={css.navlogo} src={ logo } alt='logo' />
 
         <NavMenu />
 

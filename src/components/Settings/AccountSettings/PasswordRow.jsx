@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import css from '../../../styles/settings-css.js';
 import EditButton from './EditButton.jsx';
+import TableNameCol from './TableNameCol.jsx';
 import PasswordForm from './PasswordForm.jsx';
 import ReviewDialog from './ReviewDialog.jsx';
 import {
@@ -16,20 +17,21 @@ class AccountSettingsPasswordRow extends Component {
 
   render() {
     const { view } = this.props;
-    return (
-      <TableRow style={view ? {background: '#f2f2f2'} : null}>
 
-        <TableRowColumn>Password</TableRowColumn>
+    return(
+      <TableRow style={view?{background:'#f7f7f7'}:null}>
 
-        <TableRowColumn style={css.form}>
+        <TableRowColumn style={css.overflowCol}>
 
-            <PasswordForm />
+          <PasswordForm />
 
-            <ReviewDialog type={'password'}/>
+          <ReviewDialog type={'password'}/>
 
         </TableRowColumn>
 
-        <TableRowColumn>
+        <TableRowColumn></TableRowColumn>
+
+        <TableRowColumn style={css.editCol}>
 
           <EditButton type={'password'}/>
 

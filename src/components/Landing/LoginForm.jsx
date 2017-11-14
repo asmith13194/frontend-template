@@ -80,7 +80,7 @@ class LoginForm extends Component {
         title="Login"
         modal={true}
         open={this.props.loginReducer.view}
-        style={css.dialog}
+        contentStyle={css.dialog}
       >
 
         {
@@ -103,20 +103,23 @@ class LoginForm extends Component {
           submitLabel={'Login'}
           submit={() => loginUser()}
           reset={() => this.props.resetLoginState()}
-          inputs={[{
-            name: 'email',
-            text: 'Email',
-            reducerVal: this.props.loginReducer.email,
-            changeValAction: this.props.changeLoginEmail,
-            validation: validators.textInput
-          },{
-            name: 'password',
-            text: 'Password',
-            type: 'password',
-            reducerVal: this.props.loginReducer.password,
-            changeValAction: this.props.changeLoginPassword,
-            validation: validators.textInput
-          }]}
+          inputs={[
+            {
+              name: 'email',
+              text: 'Email',
+              reducerVal: this.props.loginReducer.email,
+              changeValAction: this.props.changeLoginEmail,
+              validation: validators.textInput
+            },
+            {
+              name: 'password',
+              text: 'Password',
+              type: 'password',
+              reducerVal: this.props.loginReducer.password,
+              changeValAction: this.props.changeLoginPassword,
+              validation: validators.textInput
+            }
+          ]}
         />
 
         <p>or</p>

@@ -17,6 +17,7 @@ class TextInput extends Component {
           name={name}
           type={type}
           hintText={text}
+          style={{width:'100%'}}
           floatingLabelText={text}
           value={reducerVal === null ? '' : reducerVal}
           onChange={(a,b) => changeValAction(b)}

@@ -5,14 +5,15 @@ module.exports = {
   },
 
   started: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    width: 'fit-content',
+    margin: 'auto',
+    marginBottom: '1em',
   },
 
   dialog: {
     textAlign: 'center',
-    maxWidth: 'none',
+    minWidth: 'fit-content',
+    maxWidth: '500px'
   },
 
   buttons: {

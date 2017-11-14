@@ -18,7 +18,7 @@ class AccountSettingsPage extends Component {
 
         <SettingsAside />
 
-        <div className='content-two-thirds'>
+        <div className='box content'>
 
           <h4 style={css.title}>General Account Settings</h4>
 

@@ -6,9 +6,20 @@ module.exports = {
 
   edit: {
     float: 'right',
+    minWidth: 'unset'
+  },
+
+  editCol: {
+    padding: '.5em',
   },
 
   form: {
+    overflow: 'visible',
+    // margin: 'auto',
+    width: 'max-content'
+  },
+
+  overflowCol: {
     overflow: 'visible',
   },
 
@@ -24,6 +35,14 @@ module.exports = {
   dialog: {
     textAlign: 'center',
     maxWidth: 'none',
+  },
+
+  deactivate: {
+    margin: 'auto'
+  },
+
+  sidebar: {
+    width: 'inherit !important',
   },
 
 };

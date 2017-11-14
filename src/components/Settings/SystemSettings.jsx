@@ -17,7 +17,7 @@ class SystemSettings extends Component {
 
         <SettingsAside />
 
-        <div className='content-two-thirds'>
+        <div className='content-full'>
 
           <h4 style={css.title}>System Settings</h4>
 

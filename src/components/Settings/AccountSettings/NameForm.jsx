@@ -17,9 +17,9 @@ class AccountSettingsNameForm extends Component {
     this.state = {};
   }
 
-  componentWillUnmount(){
-    this.props.resetAccountSettingsState();
-  }
+  // componentWillUnmount(){
+  //   this.props.resetAccountSettingsState();
+  // }
 
   render() {
     return (
@@ -54,7 +54,7 @@ class AccountSettingsNameForm extends Component {
 
       :
 
-      JSON.parse(localStorage.getItem('user')).info.first + ' ' + JSON.parse(localStorage.getItem('user')).info.last
+      'Name'
     );
   }
 }

@@ -1,13 +1,14 @@
 module.exports = {
 
   navlogo: {
-      height: '48px',
-      width: '48px',
-      padding: '12px',
+      height: '100%',
+      // padding: '.5em',
   },
 
   navmenu: {
-    float: 'right'
+    float: 'right',
+    height: '100%',
+    padding: '0',
   },
 
 };

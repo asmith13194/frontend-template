@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import css from '../../../styles/settings-css.js';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import {
   resetAccountSettingsState,
   changeAccountSettingsFirstViewState,
@@ -51,7 +51,7 @@ class AccountSettingsEditButton extends Component {
       ?
       null
       :
-      <RaisedButton
+      <FlatButton
         key={'0'}
         label={'Edit'}
         style={css.edit}
@@ -69,9 +69,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     resetAccountSettingsState,
-    changeAccountSettingsFirstViewState,
     changeAccountSettingsNameViewState,
     changeAccountSettingsLastViewState,
+    changeAccountSettingsFirstViewState,
     changeAccountSettingsEmailViewState,
     changeAccountSettingsPasswordViewState,
     changeAccountSettingsDeactivateViewState, }, dispatch);

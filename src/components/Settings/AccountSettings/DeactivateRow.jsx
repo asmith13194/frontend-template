@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import css from '../../../styles/settings-css.js';
 import EditButton from './EditButton.jsx';
+import TableNameCol from './TableNameCol.jsx';
 import DeactivateButton from './DeactivateButton.jsx';
 import DeactivateDialog from './DeactivateDialog.jsx';
 import {
@@ -16,20 +17,21 @@ class AccountSettingsDeactivateRow extends Component {
 
   render() {
     const { view } = this.props;
-    return (
-      <TableRow style={view ? {background: '#f2f2f2', borderBottom: 'black'} : {borderBottom: 'black'}}>
 
-        <TableRowColumn>Manage Account</TableRowColumn>
+    return(
+      <TableRow style={view?{background:'#f7f7f7'}:null}>
 
-        <TableRowColumn style={css.form}>
+        <TableRowColumn style={css.overflowCol}>
 
-          <DeactivateButton />
+          <DeactivateButton view={view} />
 
           <DeactivateDialog />
 
         </TableRowColumn>
 
-        <TableRowColumn>
+        <TableRowColumn></TableRowColumn>
+
+        <TableRowColumn style={css.editCol}>
 
           <EditButton type={'deactivate'}/>
 

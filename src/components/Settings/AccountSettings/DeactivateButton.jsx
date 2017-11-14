@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
-// import css from '../../styles/settings-css.js';
+import css from '../../../styles/settings-css.js';
 import RaisedButton from 'material-ui/RaisedButton';
 import {
   resetAccountSettingsState,
@@ -15,22 +15,24 @@ class AccountSettingsDeactivateButton extends Component {
   }
 
   render() {
+    const { view } = this.props;
+
     const click = () => {
-      this.props.resetAccountSettingsState();
       this.props.changeAccountSettingsDeactivateDialogViewState();
     };
 
-    return (
-      this.props.accountSettingsReducer.deactivateView
+    {
+      return view
       ?
       <RaisedButton
       key={'0'}
-      label={'Deactivate Account'}
       onClick={() => click()}
+      style={css.deactivate}
+      label={'Deactivate Account'}
       />
       :
-      null
-    );
+      'Manage Account';
+    }
   }
 }
 

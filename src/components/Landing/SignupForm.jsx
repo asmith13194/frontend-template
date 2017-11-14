@@ -64,9 +64,10 @@ class Signup extends Component {
         title='Signup'
         modal={true}
         open={this.props.signupReducer.view}
-        style={css.dialog}
+        contentStyle={css.dialog}
+        autoScrollBodyContent={'true'}
       >
-      
+
         {
           this.props.signupReducer.error === null
           ?

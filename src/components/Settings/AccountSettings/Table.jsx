@@ -18,7 +18,7 @@ class AccountSettingsTable extends Component {
 
   render() {
     return (
-      <Table style={css.table}>
+      <Table >
 
         <TableBody displayRowCheckbox={false}>
 

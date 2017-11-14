@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import css from '../../../styles/settings-css.js';
 import EditButton from './EditButton.jsx';
+import TableNameCol from './TableNameCol.jsx';
 import NameForm from './NameForm.jsx';
 import ReviewDialog from './ReviewDialog';
 import {
@@ -16,20 +17,37 @@ class AccountSettingsNameRow extends Component {
 
   render() {
     const { view } = this.props;
-    return (
-      <TableRow style={view ? {background: '#f2f2f2'} : null}>
 
-        <TableRowColumn>Name</TableRowColumn>
+    return(
+      <TableRow style={view?{background:'#f7f7f7'}:null}>
 
-        <TableRowColumn style={css.form}>
+        <TableRowColumn style={css.overflowCol}>
 
+          {
+            view
+            ?
             <NameForm />
+            :
+            'Name'
+          }
 
-            <ReviewDialog type={'name'}/>
+          <ReviewDialog type={'name'}/>
 
         </TableRowColumn>
 
-        <TableRowColumn>
+        <TableRowColumn style={css.overflowCol}>
+
+          {
+            view
+            ?
+            null
+            :
+            JSON.parse(localStorage.getItem('user')).info.first + ' ' + JSON.parse(localStorage.getItem('user')).info.last
+          }
+
+        </TableRowColumn>
+
+        <TableRowColumn style={css.editCol}>
 
           <EditButton type={'name'}/>
 

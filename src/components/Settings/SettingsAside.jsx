@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-// import css from '../../styles/accountsettings-css.js';
+import css from '../../styles/settings-css.js';
 
 class AsideSettings extends Component {
   constructor(props) {
@@ -12,9 +12,8 @@ class AsideSettings extends Component {
 
   render() {
     return (
-      <div className='aside'>
+      <div className='box sidebar'>
 
-        <Menu>
 
           <MenuItem
             containerElement={ <Link to="/settings/account" /> }
@@ -28,7 +27,6 @@ class AsideSettings extends Component {
             containerElement={ <Link to="/settings/system" /> }
             primaryText="System" />
 
-        </Menu>
 
       </div>
     );

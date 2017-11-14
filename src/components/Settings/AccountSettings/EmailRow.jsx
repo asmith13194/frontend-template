@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import css from '../../../styles/settings-css.js';
 import EditButton from './EditButton.jsx';
+import TableNameCol from './TableNameCol.jsx';
 import EmailForm from './EmailForm.jsx';
 import ReviewDialog from './ReviewDialog.jsx';
 import {
@@ -16,20 +17,31 @@ class AccountSettingsEmailRow extends Component {
 
   render() {
     const { view } = this.props;
-    return (
-      <TableRow style={view ? {background: '#f2f2f2'} : null}>
 
-        <TableRowColumn>Email</TableRowColumn>
+    return(
+      <TableRow style={view?{background:'#f7f7f7'}:null}>
 
-        <TableRowColumn style={css.form}>
+        <TableRowColumn style={css.overflowCol}>
 
-            <EmailForm />
+          <EmailForm />
 
-            <ReviewDialog type={'email'}/>
+          <ReviewDialog type={'email'}/>
 
         </TableRowColumn>
 
-        <TableRowColumn>
+        <TableRowColumn style={css.overflowCol}>
+
+          {
+            view
+            ?
+            null
+            :
+            JSON.parse(localStorage.getItem('user')).info.email
+          }
+
+        </TableRowColumn>
+
+        <TableRowColumn style={css.editCol}>
 
           <EditButton type={'email'}/>
 

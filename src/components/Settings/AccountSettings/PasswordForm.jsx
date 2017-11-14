@@ -17,9 +17,9 @@ class AccountSettingsPasswordForm extends Component {
     this.state = {};
   }
 
-  componentWillUnmount(){
-    this.props.resetAccountSettingsState();
-  }
+  // componentWillUnmount(){
+  //   this.props.resetAccountSettingsState();
+  // }
 
   render() {
     return (
@@ -57,7 +57,7 @@ class AccountSettingsPasswordForm extends Component {
 
       :
 
-      ''
+      'Password'
     );
   }
 }

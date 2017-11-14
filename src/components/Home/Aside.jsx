@@ -11,7 +11,7 @@ class AsideHomePage extends Component {
 
   render() {
     return (
-      <div className='aside'>
+      <div className='box sidebar'>
 
         <h4 style={css.title}>{this.state.user.first} {this.state.user.last}</h4>
 

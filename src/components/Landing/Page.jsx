@@ -3,7 +3,7 @@ import css from '../../styles/landing-css.js';
 import Nav from '../Nav/Bar.jsx';
 import LoginForm from './LoginForm.jsx';
 import SignupForm from './SignupForm.jsx';
-import LoginButton from './LoginButton.jsx';
+import GetStartedButton from './GetStartedButton.jsx';
 
 class Landing extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Landing extends Component {
 
           <div style={css.started}>
 
-            <LoginButton label={'Get Started'}/>
+            <GetStartedButton />
 
           </div>
 

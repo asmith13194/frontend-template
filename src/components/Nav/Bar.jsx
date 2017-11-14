@@ -13,7 +13,7 @@ class Nav extends Component {
     return (
       <div className='box header' style={css.container}>
 
-          <img style={css.navlogo} src={ logo } alt='logo' />
+        <img style={css.navlogo} src={ logo } alt='logo' />
 
         <NavMenu />
 

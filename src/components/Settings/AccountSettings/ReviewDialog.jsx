@@ -17,7 +17,7 @@ import {
   changeAccountSettingsPasswordDialogViewState, } from '../../../actions/actions.js';
 
 
-class AccountSettingsNameForm extends Component {
+class AccountSettingsReviewDialog extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -128,7 +128,7 @@ class AccountSettingsNameForm extends Component {
 
 
         <Form
-          submitLabel={'Save Changes'}
+          submitLabel={'Save'}
           submit={submitChange}
           reset={this.props.resetAccountSettingsState}
           inputs={[{
@@ -162,4 +162,4 @@ function mapDispatchToProps(dispatch) {
     changeAccountSettingsPasswordDialogViewState, }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, null)(AccountSettingsNameForm);
+export default connect(mapStateToProps, mapDispatchToProps, null)(AccountSettingsReviewDialog);

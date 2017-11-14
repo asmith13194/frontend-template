@@ -18,7 +18,7 @@ import {
   changeAccountSettingsDeactivateDialogViewState, } from '../../../actions/actions.js';
 
 
-class AccountSettingsNameForm extends Component {
+class AccountSettingsUpdateForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -144,4 +144,4 @@ function mapDispatchToProps(dispatch) {
     changeAccountSettingsDeactivateDialogViewState, }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, null)(AccountSettingsNameForm);
+export default connect(mapStateToProps, mapDispatchToProps, null)(AccountSettingsUpdateForm);

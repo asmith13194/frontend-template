@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { ValidatorForm } from 'react-form-validator-core';
 import css from '../../styles/landing-css.js';
 
-class Form extends Component {
+class LegoForm extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -44,8 +44,8 @@ class Form extends Component {
     return (
       <ValidatorForm
         ref='form'
-        onSubmit={() => submit()}
         style={css.form}
+        onSubmit={() => submit()}
       >
 
         {inputs.map((input, i) => <TextInput key={i} input={input}/>)}
@@ -54,12 +54,12 @@ class Form extends Component {
           key='0'
           label='Cancel'
           primary={true}
-          onClick={() => reset()}
           style={css.buttons}
+          onClick={() => reset()}
         />
 
         <RaisedButton
-          type="submit"
+          type='submit'
           label={submitLabel}
           style={css.buttons}
         />
@@ -75,4 +75,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, null, null)(Form);
+export default connect(mapStateToProps, null, null)(LegoForm);

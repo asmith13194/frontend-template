@@ -55,7 +55,7 @@ class Signup extends Component {
 
     if(localStorage.getItem('user') !== null){
       return(
-        <Redirect to={'./home'}/>
+        <Redirect to={'./home'} />
       );
     }
 
@@ -63,16 +63,20 @@ class Signup extends Component {
       <Dialog
         title='Signup'
         modal={true}
-        open={this.props.signupReducer.view}
         contentStyle={css.dialog}
         autoScrollBodyContent={'true'}
+        open={this.props.signupReducer.view}
       >
 
         {
           this.props.signupReducer.error === null
+
           ?
+
           null
+
           :
+
           <h4>error: {this.props.signupReducer.error}</h4>
         }
 
@@ -83,41 +87,41 @@ class Signup extends Component {
           inputs={[{
             name: 'first',
             text: 'First',
+            validation: validators.textInput,
             reducerVal: this.props.signupReducer.first,
             changeValAction: this.props.changeSignupFirst,
-            validation: validators.textInput
           },{
             name: 'last',
             text: 'Last',
+            validation: validators.textInput,
             reducerVal: this.props.signupReducer.last,
             changeValAction: this.props.changeSignupLast,
-            validation: validators.textInput
           },{
             name: 'email',
             text: 'Email',
+            validation: validators.signup.email,
             reducerVal: this.props.signupReducer.email,
             changeValAction: this.props.changeSignupEmail,
-            validation: validators.signup.email
           },{
             name: 'emailConfirm',
             text: 'Confirm Email',
+            validation: validators.signup.emailConfirm,
             reducerVal: this.props.signupReducer.emailConfirm,
             changeValAction: this.props.changeSignupEmailConfirm,
-            validation: validators.signup.emailConfirm
           },{
+            type: 'password',
             name: 'password',
             text: 'Password',
-            type: 'password',
+            validation: validators.signup.password,
             reducerVal: this.props.signupReducer.password,
             changeValAction: this.props.changeSignupPassword,
-            validation: validators.signup.password
           },{
+            type: 'password',
             name: 'passwordConfirm',
             text: 'Confirm Password',
-            type: 'password',
+            validation: validators.signup.passwordConfirm,
             reducerVal: this.props.signupReducer.passwordConfirm,
             changeValAction: this.props.changeSignupPasswordConfirm,
-            validation: validators.signup.passwordConfirm
           }]}
         />
 

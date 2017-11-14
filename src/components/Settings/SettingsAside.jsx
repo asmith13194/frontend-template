@@ -6,26 +6,27 @@ import MenuItem from 'material-ui/MenuItem';
 class AsideSettings extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: JSON.parse(localStorage.getItem('user')).user};
+    this.state = {};
   }
 
   render() {
     return (
       <div className='box sidebar'>
 
+          <MenuItem
+            primaryText='General'
+            containerElement={ <Link to='/settings/account' /> }
+          />
 
           <MenuItem
-            containerElement={ <Link to="/settings/account" /> }
-            primaryText="General" />
+            primaryText='Privacy'
+            containerElement={ <Link to='/settings/privacy' /> }
+          />
 
           <MenuItem
-            containerElement={ <Link to="/settings/privacy" /> }
-            primaryText="Privacy" />
-
-          <MenuItem
-            containerElement={ <Link to="/settings/system" /> }
-            primaryText="System" />
-
+            primaryText='System'
+            containerElement={ <Link to='/settings/system' /> }
+          />
 
       </div>
     );

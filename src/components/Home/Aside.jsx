@@ -16,17 +16,20 @@ class AsideHomePage extends Component {
         <h4 style={css.title}>{this.state.user.first} {this.state.user.last}</h4>
 
         <MenuItem
-          containerElement={ <Link to="/home" /> }
-          primaryText="Home" />
+          primaryText='Home'
+          containerElement={ <Link to='/home' /> }
+        />
 
         <MenuItem
-          containerElement={ <Link to="/settings/account" /> }
-          primaryText="Settings" />
+          primaryText='Settings'
+          containerElement={ <Link to='/settings/account' /> }
+        />
 
         <MenuItem
-          containerElement={ <Link to="/" /> }
-          primaryText="Logout"
-          onClick={()=>localStorage.removeItem('user')} />
+          primaryText='Logout'
+          containerElement={ <Link to='/' /> }
+          onClick={()=>localStorage.removeItem('user')}
+        />
 
       </div>
     );

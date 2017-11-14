@@ -20,32 +20,38 @@ class NavMenu extends Component {
   render() {
     return (
       <IconMenu style={css.navmenu}
-        iconButtonElement={<IconButton style={css.navmenu}><ContentFilter /></IconButton>}
-        anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
+        anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+        iconButtonElement={<IconButton style={css.navmenu}><ContentFilter /></IconButton>}
       >
         {
           localStorage.getItem('user') === null
+
           ?
+
           <MenuItem
-            primaryText="Get Started"
+            primaryText='Get Started'
             onClick={()=>this.props.changeLoginViewState()} />
+
           :
+
           <div>
 
             <MenuItem
-              containerElement={ <Link to="/home" /> }
-              primaryText="Home" />
-
-            <MenuItem
-              containerElement={ <Link to="/settings/account" /> }
-              primaryText="Settings"
+              primaryText='Home'
+              containerElement={ <Link to='/home' /> }
             />
 
             <MenuItem
-              containerElement={ <Link to="/" /> }
-              primaryText="Logout"
-              onClick={()=>localStorage.removeItem('user')} />
+              primaryText='Settings'
+              containerElement={ <Link to='/settings/account' /> }
+            />
+
+            <MenuItem
+              primaryText='Logout'
+              containerElement={ <Link to='/' /> }
+              onClick={()=>localStorage.removeItem('user')}
+            />
 
           </div>
         }

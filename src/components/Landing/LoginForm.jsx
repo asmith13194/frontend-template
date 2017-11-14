@@ -71,31 +71,39 @@ class LoginForm extends Component {
 
     if(localStorage.getItem('user') !== null){
       return(
-        <Redirect to={'./home'}/>
+        <Redirect to={'./home'} />
       );
     }
 
     return (
       <Dialog
-        title="Login"
         modal={true}
-        open={this.props.loginReducer.view}
+        title='Login'
         contentStyle={css.dialog}
+        open={this.props.loginReducer.view}
       >
 
         {
           this.props.loginReducer.invalid
+
           ?
+
           <h4>error: invalid email or password</h4>
+
           :
+
           null
         }
 
         {
           this.props.loginReducer.error === null
+
           ?
+
           null
+
           :
+
           <h4>error: {this.props.loginReducer.error}</h4>
         }
 
@@ -107,17 +115,17 @@ class LoginForm extends Component {
             {
               name: 'email',
               text: 'Email',
+              validation: validators.textInput,
               reducerVal: this.props.loginReducer.email,
               changeValAction: this.props.changeLoginEmail,
-              validation: validators.textInput
             },
             {
+              type: 'password',
               name: 'password',
               text: 'Password',
-              type: 'password',
+              validation: validators.textInput,
               reducerVal: this.props.loginReducer.password,
               changeValAction: this.props.changeLoginPassword,
-              validation: validators.textInput
             }
           ]}
         />
@@ -144,9 +152,9 @@ function mapDispatchToProps(dispatch) {
     changeLoginEmail,
     changeLoginPassword,
     changeLoginViewState,
+    changeSignupViewState,
     changeLoginErrorState,
-    changeLoginInvalidState,
-    changeSignupViewState, }, dispatch);
+    changeLoginInvalidState, }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps, null)(LoginForm);

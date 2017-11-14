@@ -20,10 +20,10 @@ class TextInput extends Component {
           type={type}
           hintText={text}
           floatingLabelText={text}
-          value={reducerVal === null ? prefill : reducerVal}
-          onChange={(a,b) => changeValAction(b)}
           validators={validation.validators}
+          onChange={(a,b) => changeValAction(b)}
           errorMessages={validation.errorMessages}
+          value={reducerVal === null ? prefill : reducerVal}
         />
 
         <br/>

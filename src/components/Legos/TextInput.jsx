@@ -19,10 +19,10 @@ class TextInput extends Component {
           hintText={text}
           style={{width:'100%'}}
           floatingLabelText={text}
-          value={reducerVal === null ? '' : reducerVal}
-          onChange={(a,b) => changeValAction(b)}
           validators={validation.validators}
+          onChange={(a,b) => changeValAction(b)}
           errorMessages={validation.errorMessages}
+          value={reducerVal === null ? '' : reducerVal}
         />
 
         <br/>

@@ -44,8 +44,8 @@ class PrefillForm extends Component {
     return (
       <ValidatorForm
         ref='form'
-        onSubmit={() => submit()}
         style={css.form}
+        onSubmit={() => submit()}
       >
 
         {inputs.map((input, i) => <PrefillInput key={i} input={input}/>)}
@@ -54,12 +54,12 @@ class PrefillForm extends Component {
           key='0'
           label='Cancel'
           primary={true}
-          onClick={() => reset()}
           style={css.buttons}
+          onClick={() => reset()}
         />
 
         <RaisedButton
-          type="submit"
+          type='submit'
           label={submitLabel}
           style={css.buttons}
         />

@@ -21,7 +21,6 @@ class PrivacySettings extends Component {
 
           <h4 style={css.title}>Privacy Settings</h4>
 
-
         </div>
 
       </div>

@@ -25,6 +25,7 @@ class AccountSettingsPage extends Component {
           <Table />
 
         </div>
+
       </div>
     );
   }

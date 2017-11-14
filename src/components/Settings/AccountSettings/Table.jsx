@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import css from '../../../styles/settings-css.js';
-import TableRow from './TableRow.jsx';
 import { connect } from 'react-redux';
+import TableRow from './TableRow.jsx';
+// import css from '../../../styles/settings-css.js';
 import {
   Table,
   TableBody,

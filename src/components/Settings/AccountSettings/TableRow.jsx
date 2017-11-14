@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import css from '../../../styles/settings-css.js';
+import { connect } from 'react-redux';
 import EditButton from './EditButton.jsx';
 import UpdateForm from './UpdateForm.jsx';
 import ReviewDialog from './ReviewDialog';
-import { connect } from 'react-redux';
+import css from '../../../styles/settings-css.js';
 import {
   TableRow,
   TableRowColumn,
@@ -20,12 +20,12 @@ class AccountSettingsTableRow extends Component {
 
     const commands = {
       name: {
-        text: JSON.parse(localStorage.getItem('user')).info.first + ' ' + JSON.parse(localStorage.getItem('user')).info.last,
         view: this.props.accountSettingsReducer.nameView,
+        text: JSON.parse(localStorage.getItem('user')).info.first + ' ' + JSON.parse(localStorage.getItem('user')).info.last,
       },
       email: {
+        view: this.props.accountSettingsReducer.emailView,
         text: JSON.parse(localStorage.getItem('user')).info.email,
-        view: this.props.accountSettingsReducer.emailView
       },
       password: {
         text: null,

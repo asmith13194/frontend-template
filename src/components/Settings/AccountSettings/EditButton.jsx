@@ -24,20 +24,20 @@ class AccountSettingsEditButton extends Component {
 
     const commands = {
       name: {
+        reducerView: this.props.accountSettingsReducer.nameView,
         changeView: this.props.changeAccountSettingsNameViewState,
-        reducerView: this.props.accountSettingsReducer.nameView
       },
       email: {
+        reducerView: this.props.accountSettingsReducer.emailView,
         changeView: this.props.changeAccountSettingsEmailViewState,
-        reducerView: this.props.accountSettingsReducer.emailView
       },
       password: {
+        reducerView: this.props.accountSettingsReducer.passwordView,
         changeView: this.props.changeAccountSettingsPasswordViewState,
-        reducerView: this.props.accountSettingsReducer.passwordView
       },
       deactivate: {
+        reducerView: this.props.accountSettingsReducer.deactivateView,
         changeView: this.props.changeAccountSettingsDeactivateViewState,
-        reducerView: this.props.accountSettingsReducer.deactivateView
       },
     };
 
@@ -48,9 +48,13 @@ class AccountSettingsEditButton extends Component {
 
     return (
       commands[type].reducerView
+
       ?
+
       null
+
       :
+
       <FlatButton
         key={'0'}
         label={'Edit'}

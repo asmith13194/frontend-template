@@ -14,7 +14,8 @@ import {
   changeAccountSettingsPasswordConfirm,
   changeAccountSettingsNameDialogViewState,
   changeAccountSettingsEmailDialogViewState,
-  changeAccountSettingsPasswordDialogViewState, } from '../../../actions/actions.js';
+  changeAccountSettingsPasswordDialogViewState,
+  changeAccountSettingsDeactivateDialogViewState, } from '../../../actions/actions.js';
 
 
 class AccountSettingsNameForm extends Component {
@@ -29,74 +30,79 @@ class AccountSettingsNameForm extends Component {
     const commands = {
       name: {
         text: 'Name',
-        submit: this.props.changeAccountSettingsNameDialogViewState,
+        submitLabel: 'Review Change',
         view: this.props.accountSettingsReducer.nameView,
+        submit: this.props.changeAccountSettingsNameDialogViewState,
         inputs : [{
           name: 'first',
           type: 'first',
-          prefill: JSON.parse(localStorage.getItem('user')).info.first,
           text: 'First',
+          validation: validators.first,
           view: this.props.accountSettingsReducer.firstView,
           reducerVal: this.props.accountSettingsReducer.first,
           changeValAction: this.props.changeAccountSettingsFirst,
-          validation: validators.first
+          prefill: JSON.parse(localStorage.getItem('user')).info.first,
         },{
           name: 'last',
           type: 'last',
-          prefill: JSON.parse(localStorage.getItem('user')).info.last,
           text: 'Last',
+          validation: validators.last,
           view: this.props.accountSettingsReducer.lastView,
           reducerVal: this.props.accountSettingsReducer.last,
           changeValAction: this.props.changeAccountSettingsLast,
-          validation: validators.last
+          prefill: JSON.parse(localStorage.getItem('user')).info.last,
         }]
       },
       email: {
         text: 'Email',
-        submit: this.props.changeAccountSettingsEmailDialogViewState,
+        submitLabel: 'Review Change',
         view: this.props.accountSettingsReducer.emailView,
+        submit: this.props.changeAccountSettingsEmailDialogViewState,
         inputs : [{
           name: 'email',
-          prefill: JSON.parse(localStorage.getItem('user')).info.email,
           text: 'Email',
+          validation: validators.email,
           reducerVal: this.props.accountSettingsReducer.email,
           changeValAction: this.props.changeAccountSettingsEmail,
-          validation: validators.email
+          prefill: JSON.parse(localStorage.getItem('user')).info.email,
         },{
-          name: 'confirm email',
           prefill: '',
+          name: 'confirm email',
           text: 'Confirm Email',
+          validation: validators.emailConfirm,
           reducerVal: this.props.accountSettingsReducer.emailConfirm,
           changeValAction: this.props.changeAccountSettingsEmailConfirm,
-          validation: validators.emailConfirm
         }]
       },
       password: {
         text: 'Password',
-        submit: this.props.changeAccountSettingsPasswordDialogViewState,
+        submitLabel: 'Review Change',
         view: this.props.accountSettingsReducer.passwordView,
+        submit: this.props.changeAccountSettingsPasswordDialogViewState,
         inputs : [{
+          prefill: '',
           name: 'password',
           type: 'password',
           text: 'New Password',
-          prefill: '',
+          validation: validators.password,
           reducerVal: this.props.accountSettingsReducer.password,
           changeValAction: this.props.changeAccountSettingsPassword,
-          validation: validators.password
         },{
-          name: 'confirm password',
-          type: 'password',
-          text: 'Confirm New Password',
           prefill: '',
+          type: 'password',
+          name: 'confirm password',
+          text: 'Confirm New Password',
+          validation: validators.passwordConfirm,
           reducerVal: this.props.accountSettingsReducer.passwordConfirm,
           changeValAction: this.props.changeAccountSettingsPasswordConfirm,
-          validation: validators.passwordConfirm
         }]
       },
       deactivate: {
-        typeText: 'Manage Account',
-        text: '',
-        view: this.props.accountSettingsReducer.deactivateView
+        inputs : [],
+        text: 'Manage Account',
+        submitLabel: 'Deactivate Account',
+        view: this.props.accountSettingsReducer.deactivateView,
+        submit: this.props.changeAccountSettingsDeactivateDialogViewState,
       }
     };
 
@@ -106,7 +112,7 @@ class AccountSettingsNameForm extends Component {
       ?
 
       <PrefillForm
-        submitLabel={'review change'}
+        submitLabel={commands[type].submitLabel}
         submit={commands[type].submit}
         reset={this.props.resetAccountSettingsState}
         inputs={commands[type].inputs}
@@ -134,7 +140,8 @@ function mapDispatchToProps(dispatch) {
     changeAccountSettingsPasswordConfirm,
     changeAccountSettingsNameDialogViewState,
     changeAccountSettingsEmailDialogViewState,
-    changeAccountSettingsPasswordDialogViewState, }, dispatch);
+    changeAccountSettingsPasswordDialogViewState,
+    changeAccountSettingsDeactivateDialogViewState, }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps, null)(AccountSettingsNameForm);

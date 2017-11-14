@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import css from '../../../styles/settings-css.js';
 import EditButton from './EditButton.jsx';
-import NameForm from './NameForm.jsx';
-import EmailForm from './EmailForm.jsx';
-import PasswordForm from './PasswordForm.jsx';
+import UpdateForm from './UpdateForm.jsx';
 import ReviewDialog from './ReviewDialog';
-import DeactivateButton from './DeactivateButton';
 import { connect } from 'react-redux';
 import {
   TableRow,
@@ -23,27 +20,19 @@ class AccountSettingsTableRow extends Component {
 
     const commands = {
       name: {
-        form: <NameForm />,
-        typeText: 'Name',
         text: JSON.parse(localStorage.getItem('user')).info.first + ' ' + JSON.parse(localStorage.getItem('user')).info.last,
         view: this.props.accountSettingsReducer.nameView,
       },
       email: {
-        form: <EmailForm />,
-        typeText: 'Email',
         text: JSON.parse(localStorage.getItem('user')).info.email,
         view: this.props.accountSettingsReducer.emailView
       },
       password: {
-        form: <PasswordForm />,
-        typeText: 'Password',
-        text: '',
+        text: null,
         view: this.props.accountSettingsReducer.passwordView
       },
       deactivate: {
-        form: <DeactivateButton  view={this.props.accountSettingsReducer.deactivateView}/>,
-        typeText: 'Manage Account',
-        text: '',
+        text: null,
         view: this.props.accountSettingsReducer.deactivateView
       }
     };
@@ -53,7 +42,7 @@ class AccountSettingsTableRow extends Component {
 
         <TableRowColumn style={css.overflowCol}>
 
-          { commands[type].view ? commands[type].form : commands[type].typeText }
+          <UpdateForm type={type}/>
 
           <ReviewDialog type={type}/>
 

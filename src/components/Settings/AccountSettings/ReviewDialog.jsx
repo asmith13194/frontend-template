@@ -34,7 +34,6 @@ class AccountSettingsNameForm extends Component {
       name: {
         url: 'http://localhost:8000/auth/update',
         view: this.props.accountSettingsReducer.nameDialogView,
-        changeView: this.props.changeAccountSettingsNameDialogViewState,
         text: 'If youre happy with the new name, please enter your password:',
         val: `Change name to ${this.props.accountSettingsReducer.first}  ${this.props.accountSettingsReducer.last}`,
         payload:{first: this.props.accountSettingsReducer.first, last: this.props.accountSettingsReducer.last}
@@ -42,7 +41,6 @@ class AccountSettingsNameForm extends Component {
       email: {
         url: 'http://localhost:8000/auth/update',
         view: this.props.accountSettingsReducer.emailDialogView,
-        changeView: this.props.changeAccountSettingsEmailDialogViewState,
         val: `Change email to ${this.props.accountSettingsReducer.email}`,
         text: 'If youre happy with the new email, please enter your password:',
         payload:{email: this.props.accountSettingsReducer.email}
@@ -50,7 +48,6 @@ class AccountSettingsNameForm extends Component {
       password: {
         url: 'http://localhost:8000/auth/update/password',
         view: this.props.accountSettingsReducer.passwordDialogView,
-        changeView: this.props.changeAccountSettingsPasswordDialogViewState,
         val: 'Change password',
         text: 'If youre happy with the new password, please enter your current password:',
         payload:{password: this.props.accountSettingsReducer.password}
@@ -58,7 +55,6 @@ class AccountSettingsNameForm extends Component {
       deactivate: {
         url: 'http://localhost:8000/auth/deactivate',
         view: this.props.accountSettingsReducer.deactivateDialogView,
-        changeView: this.props.changeAccountSettingsDeactivateViewStateDialogViewState,
         text: 'If youre ready to deactivate your account, please enter your password:',
         val: null,
         payload: null

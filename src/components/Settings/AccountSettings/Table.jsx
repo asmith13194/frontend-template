@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import css from '../../../styles/settings-css.js';
+// import css from '../../../styles/settings-css.js';
 import TableRow from './TableRow.jsx';
 import { connect } from 'react-redux';
 import {
@@ -10,16 +10,18 @@ import {
 class AccountSettingsTable extends Component {
   constructor(props) {
     super(props);
-    this.state = { types: [ 'name', 'email', 'password', 'deactivate' ] };
+    this.state = {};
   }
 
   render() {
+    const types = [ 'name', 'email', 'password', 'deactivate' ];
+
     return (
       <Table >
 
         <TableBody displayRowCheckbox={false}>
 
-          {this.state.types.map((type, i) =>( <TableRow key={i} type={type}/>))}
+          {types.map((type, i) =>( <TableRow key={i} type={type}/>))}
 
         </TableBody>
 

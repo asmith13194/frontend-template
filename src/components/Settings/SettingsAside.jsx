@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-import css from '../../styles/settings-css.js';
+// import css from '../../styles/settings-css.js';
 
 class AsideSettings extends Component {
   constructor(props) {

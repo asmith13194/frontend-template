@@ -7,7 +7,6 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import ContentFilter from 'material-ui/svg-icons/content/filter-list';
-import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import {
   changeLoginViewState,
   changeSignupViewState, } from '../../actions/actions.js';

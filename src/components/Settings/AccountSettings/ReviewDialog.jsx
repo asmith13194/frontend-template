@@ -32,22 +32,36 @@ class AccountSettingsNameForm extends Component {
 
     const commands = {
       name: {
+        url: 'http://localhost:8000/auth/update',
         view: this.props.accountSettingsReducer.nameDialogView,
         changeView: this.props.changeAccountSettingsNameDialogViewState,
-        val: this.props.accountSettingsReducer.first + ' ' + this.props.accountSettingsReducer.last,
+        text: 'If youre happy with the new name, please enter your password:',
+        val: `Change name to ${this.props.accountSettingsReducer.first}  ${this.props.accountSettingsReducer.last}`,
         payload:{first: this.props.accountSettingsReducer.first, last: this.props.accountSettingsReducer.last}
       },
       email: {
+        url: 'http://localhost:8000/auth/update',
         view: this.props.accountSettingsReducer.emailDialogView,
         changeView: this.props.changeAccountSettingsEmailDialogViewState,
-        val: this.props.accountSettingsReducer.email,
+        val: `Change email to ${this.props.accountSettingsReducer.email}`,
+        text: 'If youre happy with the new email, please enter your password:',
         payload:{email: this.props.accountSettingsReducer.email}
       },
       password: {
+        url: 'http://localhost:8000/auth/update/password',
         view: this.props.accountSettingsReducer.passwordDialogView,
         changeView: this.props.changeAccountSettingsPasswordDialogViewState,
-        val: '********',
+        val: 'Change password',
+        text: 'If youre happy with the new password, please enter your current password:',
         payload:{password: this.props.accountSettingsReducer.password}
+      },
+      deactivate: {
+        url: 'http://localhost:8000/auth/deactivate',
+        view: this.props.accountSettingsReducer.deactivateDialogView,
+        changeView: this.props.changeAccountSettingsDeactivateViewStateDialogViewState,
+        text: 'If youre ready to deactivate your account, please enter your password:',
+        val: null,
+        payload: null
       },
     };
 
@@ -66,7 +80,7 @@ class AccountSettingsNameForm extends Component {
         default:
           break;
       }
-      axios.post(type === 'password' ? 'http://localhost:8000/auth/update/password' : 'http://localhost:8000/auth/update', {password: this.props.accountSettingsReducer.passwordAuth, payload: commands[type].payload, token: JSON.parse(localStorage.getItem('user')).token})
+      axios.post(commands[type].url, {password: this.props.accountSettingsReducer.passwordAuth, payload: commands[type].payload, token: JSON.parse(localStorage.getItem('user')).token})
       .then(response => {
         switch(response.data.type){
           case 'invalid-user':
@@ -87,6 +101,11 @@ class AccountSettingsNameForm extends Component {
             localStorage.setItem('user', JSON.stringify(response.data.payload));
             this.props.resetAccountSettingsState();
             return;
+          case 'deactivated':
+            this.props.resetAccountSettingsState();
+            localStorage.removeItem('user');
+            window.location.reload(true);
+            return;
           default:
             return this.props.resetAccountSettingsState();
         }
@@ -104,9 +123,9 @@ class AccountSettingsNameForm extends Component {
         modal={true}
         open={commands[type].view}
       >
-        <p>Change { type } to {commands[type].val}</p>
+        <p>{commands[type].val}</p>
 
-        <p>If you're happy with the new { type }, please enter your password:</p>
+        <p>{commands[type].text}</p>
 
         {this.props.accountSettingsReducer.wrongPasswordView ? <p>wrong password</p> : null}
         {this.props.accountSettingsReducer.errorView ? <p>{this.props.accountSettingsReducer.error}</p> : null}

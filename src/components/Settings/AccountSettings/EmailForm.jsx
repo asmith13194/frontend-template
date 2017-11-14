@@ -17,10 +17,6 @@ class AccountSettingsEmailForm extends Component {
     this.state = {};
   }
 
-  // componentWillUnmount(){
-  //   this.props.resetAccountSettingsState();
-  // }
-
   render() {
     return (
       this.props.accountSettingsReducer.emailView

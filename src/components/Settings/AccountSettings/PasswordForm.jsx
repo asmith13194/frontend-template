@@ -17,10 +17,6 @@ class AccountSettingsPasswordForm extends Component {
     this.state = {};
   }
 
-  // componentWillUnmount(){
-  //   this.props.resetAccountSettingsState();
-  // }
-
   render() {
     return (
       this.props.accountSettingsReducer.passwordView
@@ -29,29 +25,28 @@ class AccountSettingsPasswordForm extends Component {
 
       <div>
 
-
-      <PrefillForm
-        submitLabel={'review change'}
-        submit={() => this.props.changeAccountSettingsPasswordDialogViewState()}
-        reset={this.props.resetAccountSettingsState}
-        inputs={[{
-          name: 'password',
-          type: 'password',
-          text: 'New Password',
-          prefill: '',
-          reducerVal: this.props.accountSettingsReducer.password,
-          changeValAction: this.props.changeAccountSettingsPassword,
-          validation: validators.password
-        },{
-          name: 'confirm password',
-          type: 'password',
-          text: 'Confirm New Password',
-          prefill: '',
-          reducerVal: this.props.accountSettingsReducer.passwordConfirm,
-          changeValAction: this.props.changeAccountSettingsPasswordConfirm,
-          validation: validators.passwordConfirm
-        }]}
-      />
+        <PrefillForm
+          submitLabel={'review change'}
+          submit={() => this.props.changeAccountSettingsPasswordDialogViewState()}
+          reset={this.props.resetAccountSettingsState}
+          inputs={[{
+            name: 'password',
+            type: 'password',
+            text: 'New Password',
+            prefill: '',
+            reducerVal: this.props.accountSettingsReducer.password,
+            changeValAction: this.props.changeAccountSettingsPassword,
+            validation: validators.password
+          },{
+            name: 'confirm password',
+            type: 'password',
+            text: 'Confirm New Password',
+            prefill: '',
+            reducerVal: this.props.accountSettingsReducer.passwordConfirm,
+            changeValAction: this.props.changeAccountSettingsPasswordConfirm,
+            validation: validators.passwordConfirm
+          }]}
+        />
 
       </div>
 

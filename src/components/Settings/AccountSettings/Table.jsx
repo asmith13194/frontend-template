@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import css from '../../../styles/settings-css.js';
-import NameRow from './NameRow.jsx';
-import EmailRow from './EmailRow.jsx';
-import PasswordRow from './PasswordRow.jsx';
-import DeactivateRow from './DeactivateRow.jsx';
+import TableRow from './TableRow.jsx';
 import { connect } from 'react-redux';
 import {
   Table,
@@ -13,7 +10,7 @@ import {
 class AccountSettingsTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { types: [ 'name', 'email', 'password', 'deactivate' ] };
   }
 
   render() {
@@ -22,13 +19,7 @@ class AccountSettingsTable extends Component {
 
         <TableBody displayRowCheckbox={false}>
 
-          <NameRow view={this.props.accountSettingsReducer.nameView}/>
-
-          <EmailRow view={this.props.accountSettingsReducer.emailView}/>
-
-          <PasswordRow view={this.props.accountSettingsReducer.passwordView}/>
-
-          <DeactivateRow view={this.props.accountSettingsReducer.deactivateView}/>
+          {this.state.types.map((type, i) =>( <TableRow key={i} type={type}/>))}
 
         </TableBody>
 

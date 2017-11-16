@@ -2,10 +2,9 @@ import { combineReducers } from 'redux';
 
 const loginReducer = (state = {
   view: false,
+  error: null,
   email: null,
-  password: null,
-  invalid: false,
-  error: null, }, action) => {
+  password: null, }, action) => {
  switch(action.type) {
   case 'CHANGE_LOGIN_VIEW_STATE':
     return Object.assign({}, state, {
@@ -16,19 +15,10 @@ const loginReducer = (state = {
       email: action.payload.email
     });
   case 'CHANGE_LOGIN_FORM_PASSWORD':
-    switch(action.payload.password){
-      case 'password':
-        return state;
-      default:
-        return Object.assign({}, state, {
-          password: action.payload.password
-        });
-    }
-  case 'CHANGE_LOGIN_INVALID_STATE':
     return Object.assign({}, state, {
-      invalid: !state.invalid
+      password: action.payload.password
     });
-  case 'CHANGE_LOGIN_ERRROR_STATE':
+  case 'CHANGE_LOGIN_ERROR_STATE':
     return Object.assign({}, state, {
       error: action.payload.error
     });
@@ -36,9 +26,8 @@ const loginReducer = (state = {
     return Object.assign({}, state, {
       view: false,
       email: null,
-      password: null,
-      invalid: false,
       error: null,
+      password: null,
     });
   default:
     return state;
@@ -47,67 +36,56 @@ const loginReducer = (state = {
 
 const signupReducer = (state = {
   view: false,
-  first: null,
   last: null,
+  error: null,
+  first: null,
   email: null,
-  emailConfirm: null,
   password: null,
-  passwordConfirm: null,
-  duplicate: false,
-  error: null, }, action) => {
+  emailConfirm: null,
+  passwordConfirm: null, }, action) => {
   switch(action.type) {
     case 'CHANGE_SIGNUP_VIEW_STATE':
       return Object.assign({}, state, {
         view: !state.view
       });
-    case 'CHANGE_SIGNUP_FORM_FIRST':
-      return Object.assign({}, state, {
-        first: action.payload.first
-      });
     case 'CHANGE_SIGNUP_FORM_LAST':
       return Object.assign({}, state, {
         last: action.payload.last
+      });
+    case 'CHANGE_SIGNUP_FORM_FIRST':
+      return Object.assign({}, state, {
+        first: action.payload.first
       });
     case 'CHANGE_SIGNUP_FORM_EMAIL':
       return Object.assign({}, state, {
         email: action.payload.email
       });
+    case 'CHANGE_SIGNUP_ERROR_STATE':
+      return Object.assign({}, state, {
+        error: action.payload.error
+    });
+    case 'CHANGE_SIGNUP_FORM_PASSWORD':
+      return Object.assign({}, state, {
+        password: action.payload.password
+      });
     case 'CHANGE_SIGNUP_FORM_EMAIL_CONFIRM':
       return Object.assign({}, state, {
         emailConfirm: action.payload.emailConfirm
-      });
-    case 'CHANGE_SIGNUP_FORM_PASSWORD':
-      switch(action.payload.password){
-        case 'password':
-          return state;
-        default:
-          return Object.assign({}, state, {
-            password: action.payload.password
-          });
-      }
+    });
     case 'CHANGE_SIGNUP_FORM_PASSWORD_CONFIRM':
       return Object.assign({}, state, {
         passwordConfirm: action.payload.passwordConfirm
       });
-    case 'CHANGE_SIGNUP_DUPLICATE_STATE':
-      return Object.assign({}, state, {
-        duplicate: !state.duplicate
-      });
-    case 'CHANGE_SIGNUP_ERROR_STATE':
-      return Object.assign({}, state, {
-        error: action.payload.error
-      });
     case 'RESET_SIGNUP_REDUCER':
       return Object.assign({}, state, {
         view: false,
-        first: null,
         last: null,
-        email: null,
-        emailConfirm: null,
-        password: null,
-        passwordConfirm: null,
-        duplicate: false,
         error: null,
+        first: null,
+        email: null,
+        password: null,
+        emailConfirm: null,
+        passwordConfirm: null,
       });
     default:
       return state;

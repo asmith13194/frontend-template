@@ -18,6 +18,8 @@ class NavMenu extends Component {
   }
 
   render() {
+    const { changeLoginViewState } = this.props;
+
     return (
       <IconMenu style={css.navmenu}
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -31,7 +33,7 @@ class NavMenu extends Component {
 
           <MenuItem
             primaryText='Get Started'
-            onClick={()=>this.props.changeLoginViewState()} />
+            onClick={changeLoginViewState} />
 
           :
 

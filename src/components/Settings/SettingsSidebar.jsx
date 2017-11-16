@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import MenuItem from 'material-ui/MenuItem';
 // import css from '../../styles/settings-css.js';
 
-class AsideSettings extends Component {
+class SettingsSidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -33,4 +33,4 @@ class AsideSettings extends Component {
   }
 }
 
-export default AsideSettings;
+export default SettingsSidebar;

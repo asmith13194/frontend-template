@@ -22,11 +22,7 @@ class Landing extends Component {
 
           <h2 style={css.title}>Welcome!</h2>
 
-          <div style={css.started}>
-
-            <GetStartedButton />
-
-          </div>
+          <GetStartedButton />
 
           <LoginForm />
 

@@ -28,28 +28,39 @@ class Signup extends Component {
   }
 
   render() {
+    const {
+      signupReducer,
+      resetSignupState,
+      changeSignupLast,
+      changeSignupFirst,
+      changeSignupEmail,
+      changeSignupPassword,
+      changeSignupErrorState,
+      changeSignupEmailConfirm,
+      changeSignupPasswordConfirm, } = this.props;
+
     const createUser = () => {
       let user = {
-        first: this.props.signupReducer.first,
-        last: this.props.signupReducer.last,
-        email: this.props.signupReducer.email,
-        password: this.props.signupReducer.password,
+        first: signupReducer.first,
+        last: signupReducer.last,
+        email: signupReducer.email,
+        password: signupReducer.password,
       };
-      axios.post('http://localhost:8000/auth/signup', user)
+      axios
+      .post(`${process.env.REACT_APP_API}/auth/signup`, {payload: user})
       .then(response => {
-        switch(response.data.type){
-          case 'error':
-            return this.props.changeSignupErrorState(response.data.payload.detail);
-          case 'success':
+        switch(response.data.success){
+          case true:
             localStorage.setItem('user', JSON.stringify(response.data.payload));
-            this.props.resetSignupState();
-            return;
+            return resetSignupState();
+          case false:
+            return changeSignupErrorState(response.data.payload.detail);
           default:
-            return this.props.resetSignupState();
+            return resetSignupState();
         }
       })
       .catch(error => {
-        return this.props.changeSignupErrorState(error.detail);
+        return changeSignupErrorState(error.detail);
       });
     };
 
@@ -65,11 +76,11 @@ class Signup extends Component {
         modal={true}
         contentStyle={css.dialog}
         autoScrollBodyContent={true}
-        open={this.props.signupReducer.view}
+        open={signupReducer.view}
       >
 
         {
-          this.props.signupReducer.error === null
+          signupReducer.error === null
 
           ?
 
@@ -77,51 +88,51 @@ class Signup extends Component {
 
           :
 
-          <h4>error: {this.props.signupReducer.error}</h4>
+          <h4>error: {signupReducer.error}</h4>
         }
 
         <Form
           submitLabel={'Signup'}
           submit={() => createUser()}
-          reset={()=>this.props.resetSignupState()}
+          reset={()=>resetSignupState()}
           inputs={[{
             name: 'first',
             text: 'First',
             validation: validators.textInput,
-            reducerVal: this.props.signupReducer.first,
-            changeValAction: this.props.changeSignupFirst,
+            reducerVal: signupReducer.first,
+            changeValAction: changeSignupFirst,
           },{
             name: 'last',
             text: 'Last',
             validation: validators.textInput,
-            reducerVal: this.props.signupReducer.last,
-            changeValAction: this.props.changeSignupLast,
+            reducerVal: signupReducer.last,
+            changeValAction: changeSignupLast,
           },{
             name: 'email',
             text: 'Email',
             validation: validators.signup.email,
-            reducerVal: this.props.signupReducer.email,
-            changeValAction: this.props.changeSignupEmail,
+            reducerVal: signupReducer.email,
+            changeValAction: changeSignupEmail,
           },{
             name: 'emailConfirm',
             text: 'Confirm Email',
             validation: validators.signup.emailConfirm,
-            reducerVal: this.props.signupReducer.emailConfirm,
-            changeValAction: this.props.changeSignupEmailConfirm,
+            reducerVal: signupReducer.emailConfirm,
+            changeValAction: changeSignupEmailConfirm,
           },{
             type: 'password',
             name: 'password',
             text: 'Password',
             validation: validators.signup.password,
-            reducerVal: this.props.signupReducer.password,
-            changeValAction: this.props.changeSignupPassword,
+            reducerVal: signupReducer.password,
+            changeValAction: changeSignupPassword,
           },{
             type: 'password',
             name: 'passwordConfirm',
             text: 'Confirm Password',
             validation: validators.signup.passwordConfirm,
-            reducerVal: this.props.signupReducer.passwordConfirm,
-            changeValAction: this.props.changeSignupPasswordConfirm,
+            reducerVal: signupReducer.passwordConfirm,
+            changeValAction: changeSignupPasswordConfirm,
           }]}
         />
 

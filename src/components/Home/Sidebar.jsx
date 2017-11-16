@@ -3,17 +3,17 @@ import css from '../../styles/homepage-css.js';
 import { Link } from 'react-router-dom';
 import MenuItem from 'material-ui/MenuItem';
 
-class AsideHomePage extends Component {
+class HomePageSidebar extends Component {
   constructor(props) {
     super(props);
-    this.state = { user: JSON.parse(localStorage.getItem('user')).info};
+    this.state = {};
   }
 
   render() {
     return (
       <div className='box sidebar'>
 
-        <h4 style={css.title}>{this.state.user.first} {this.state.user.last}</h4>
+        <h4 style={css.title}>{JSON.parse(localStorage.getItem('user')).info.first} {JSON.parse(localStorage.getItem('user')).info.last}</h4>
 
         <MenuItem
           primaryText='Home'
@@ -36,4 +36,4 @@ class AsideHomePage extends Component {
   }
 }
 
-export default AsideHomePage;
+export default HomePageSidebar;

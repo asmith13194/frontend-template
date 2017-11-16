@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Nav from '../Nav/Bar.jsx';
 import css from '../../styles/homepage-css.js';
-import HomePageAside from './Aside.jsx';
+import Sidebar from './Sidebar.jsx';
 
-class Home extends Component {
+class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -15,7 +15,7 @@ class Home extends Component {
 
         <Nav />
 
-        <HomePageAside />
+        <Sidebar />
 
         <div className='box content'>
 
@@ -32,4 +32,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default HomePage;

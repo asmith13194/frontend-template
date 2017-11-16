@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import css from '../../styles/settings-css.js';
 import Nav from '../Nav/Bar.jsx';
-import SettingsAside from './SettingsAside.jsx';
+import Sidebar from './SettingsSidebar.jsx';
 
 class SystemSettings extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class SystemSettings extends Component {
 
         <Nav />
 
-        <SettingsAside />
+        <Sidebar />
 
         <div className='box content'>
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import css from '../../../styles/settings-css.js';
 import Table from './Table.jsx';
 import Nav from '../../Nav/Bar.jsx';
-import SettingsAside from '../SettingsAside.jsx';
+import Sidebar from '../SettingsSidebar.jsx';
 
 class AccountSettingsPage extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class AccountSettingsPage extends Component {
 
         <Nav />
 
-        <SettingsAside />
+        <Sidebar />
 
         <div className='box content'>
 

@@ -5,9 +5,7 @@ import css from '../../../styles/settings-css.js';
 import FlatButton from 'material-ui/FlatButton';
 import {
   resetAccountSettingsState,
-  changeAccountSettingsFirstViewState,
   changeAccountSettingsNameViewState,
-  changeAccountSettingsLastViewState,
   changeAccountSettingsEmailViewState,
   changeAccountSettingsPasswordViewState,
   changeAccountSettingsDeactivateViewState, } from '../../../actions/actions.js';
@@ -20,34 +18,41 @@ class AccountSettingsEditButton extends Component {
   }
 
   render() {
-    const { type } = this.props;
+    const {
+      type,
+      accountSettingsReducer,
+      resetAccountSettingsState,
+      changeAccountSettingsNameViewState,
+      changeAccountSettingsEmailViewState,
+      changeAccountSettingsPasswordViewState,
+      changeAccountSettingsDeactivateViewState, } = this.props;
 
     const commands = {
       name: {
-        reducerView: this.props.accountSettingsReducer.nameView,
-        changeView: this.props.changeAccountSettingsNameViewState,
+        editFormView: accountSettingsReducer.nameView,
+        toggleEditFormView: changeAccountSettingsNameViewState,
       },
       email: {
-        reducerView: this.props.accountSettingsReducer.emailView,
-        changeView: this.props.changeAccountSettingsEmailViewState,
+        editFormView: accountSettingsReducer.emailView,
+        toggleEditFormView: changeAccountSettingsEmailViewState,
       },
       password: {
-        reducerView: this.props.accountSettingsReducer.passwordView,
-        changeView: this.props.changeAccountSettingsPasswordViewState,
+        editFormView: accountSettingsReducer.passwordView,
+        toggleEditFormView: changeAccountSettingsPasswordViewState,
       },
       deactivate: {
-        reducerView: this.props.accountSettingsReducer.deactivateView,
-        changeView: this.props.changeAccountSettingsDeactivateViewState,
+        editFormView: accountSettingsReducer.deactivateView,
+        toggleEditFormView: changeAccountSettingsDeactivateViewState,
       },
     };
 
     const click = () => {
-      this.props.resetAccountSettingsState();
-      commands[type].changeView();
+      resetAccountSettingsState();
+      commands[type].toggleEditFormView();
     };
 
     return (
-      commands[type].reducerView
+      commands[type].editFormView
 
       ?
 
@@ -74,8 +79,6 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     resetAccountSettingsState,
     changeAccountSettingsNameViewState,
-    changeAccountSettingsLastViewState,
-    changeAccountSettingsFirstViewState,
     changeAccountSettingsEmailViewState,
     changeAccountSettingsPasswordViewState,
     changeAccountSettingsDeactivateViewState, }, dispatch);

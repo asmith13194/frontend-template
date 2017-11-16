@@ -12,9 +12,8 @@ import {
   resetLoginState,
   changeLoginEmail,
   changeLoginPassword,
-  changeLoginErrorState,
   changeLoginViewState,
-  changeLoginInvalidState,
+  changeLoginErrorState,
   changeSignupViewState, } from '../../actions/actions.js';
 
 class LoginForm extends Component {
@@ -28,43 +27,40 @@ class LoginForm extends Component {
   }
 
   render() {
+    const {
+      loginReducer,
+      resetLoginState,
+      changeLoginEmail,
+      changeLoginPassword,
+      changeLoginViewState,
+      changeSignupViewState,
+      changeLoginErrorState, } = this.props;
+
     const signup = () => {
-      this.props.resetLoginState();
-      this.props.changeLoginViewState();
-      this.props.changeSignupViewState();
+      resetLoginState();
+      changeLoginViewState();
+      changeSignupViewState();
     };
 
     const loginUser = () => {
-      switch(this.props.loginReducer.invalid){
-        case true:
-          this.props.changeLoginInvalidState();
-          break;
-        default:
-          break;
-      }
-      let user = this.props.loginReducer;
-      axios.post('http://localhost:8000/auth/login', user)
+      axios.post(`${process.env.REACT_APP_API}/auth/login`, {email: loginReducer.email, password: loginReducer.password})
       .then(response => {
-         switch(response.data.type){
-          case 'invalid-user':
-            this.props.changeLoginInvalidState();
-            this.props.changeLoginPassword('');
-            return;
-          case 'error':
-            this.props.changeLoginErrorState(response.data.payload);
-            this.props.changeLoginPassword('');
-            return;
-          case 'success':
+         switch(response.data.success){
+          case true:
             localStorage.setItem('user', JSON.stringify(response.data.payload));
-            this.props.resetLoginState();
+            resetLoginState();
+            return;
+          case false:
+            changeLoginErrorState(response.data.payload);
+            changeLoginPassword('');
             return;
           default:
-            return this.props.resetLoginState();
+            return resetLoginState();
         }
       })
       .catch(error => {
-        this.props.changeLoginErrorState(error.detail);
-        this.props.changeLoginPassword('');
+        changeLoginErrorState(error.detail);
+        changeLoginPassword('');
         return;
       });
     };
@@ -80,52 +76,29 @@ class LoginForm extends Component {
         modal={true}
         title='Login'
         contentStyle={css.dialog}
-        open={this.props.loginReducer.view}
+        open={loginReducer.view}
       >
-
-        {
-          this.props.loginReducer.invalid
-
-          ?
-
-          <h4>error: invalid email or password</h4>
-
-          :
-
-          null
-        }
-
-        {
-          this.props.loginReducer.error === null
-
-          ?
-
-          null
-
-          :
-
-          <h4>error: {this.props.loginReducer.error}</h4>
-        }
+        { loginReducer.error === null ? null : <h4>error: {loginReducer.error}</h4> }
 
         <Form
           submitLabel={'Login'}
-          submit={() => loginUser()}
-          reset={() => this.props.resetLoginState()}
+          submit={loginUser}
+          reset={resetLoginState}
           inputs={[
             {
               name: 'email',
               text: 'Email',
               validation: validators.textInput,
-              reducerVal: this.props.loginReducer.email,
-              changeValAction: this.props.changeLoginEmail,
+              reducerVal: loginReducer.email,
+              changeValAction: changeLoginEmail,
             },
             {
               type: 'password',
               name: 'password',
               text: 'Password',
               validation: validators.textInput,
-              reducerVal: this.props.loginReducer.password,
-              changeValAction: this.props.changeLoginPassword,
+              reducerVal: loginReducer.password,
+              changeValAction: changeLoginPassword,
             }
           ]}
         />
@@ -134,7 +107,7 @@ class LoginForm extends Component {
 
         <RaisedButton
           label={'Signup'}
-          onClick={() => signup()}
+          onClick={signup}
         />
 
       </Dialog>
@@ -153,8 +126,7 @@ function mapDispatchToProps(dispatch) {
     changeLoginPassword,
     changeLoginViewState,
     changeSignupViewState,
-    changeLoginErrorState,
-    changeLoginInvalidState, }, dispatch);
+    changeLoginErrorState, }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps, null)(LoginForm);

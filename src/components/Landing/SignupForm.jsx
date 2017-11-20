@@ -3,10 +3,9 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Form from '../Legos/Form.jsx';
-import validators from '../../validators/textinput.js';
-import css from '../../styles/landing-css.js';
 import Dialog from 'material-ui/Dialog';
-import axios from 'axios';
+import css from '../../styles/landing-css.js';
+import validators from '../../validators/textinput.js';
 import {
   resetSignupState,
   changeSignupFirst,
@@ -39,27 +38,41 @@ class Signup extends Component {
       changeSignupEmailConfirm,
       changeSignupPasswordConfirm, } = this.props;
 
-    const createUser = () => {
-      let user = {
-        first: signupReducer.first,
-        last: signupReducer.last,
-        email: signupReducer.email,
-        password: signupReducer.password,
-      };
-      axios
-      .post(`${process.env.REACT_APP_API}/auth/signup`, {payload: user})
+
+    const myInit = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      body: JSON.stringify({
+        payload: {
+          first: signupReducer.first,
+          last: signupReducer.last,
+          email: signupReducer.email,
+          password: signupReducer.password,
+        }
+      })
+    };
+
+    const createUser = async() => {
+      await fetch(`${process.env.REACT_APP_API}/auth/signup`, myInit)
+      .then(respons => respons.json())
       .then(response => {
-        switch(response.data.success){
+        switch(response.success){
           case true:
-            localStorage.setItem('user', JSON.stringify(response.data.payload));
+            localStorage.setItem('user', JSON.stringify(response.payload));
             return resetSignupState();
           case false:
-            return changeSignupErrorState(response.data.payload.detail);
+            console.error(response.payload);
+            return changeSignupErrorState(response.payload.detail);
           default:
             return resetSignupState();
         }
       })
       .catch(error => {
+        console.error(error);
         return changeSignupErrorState(error.detail);
       });
     };
@@ -93,8 +106,8 @@ class Signup extends Component {
 
         <Form
           submitLabel={'Signup'}
-          submit={() => createUser()}
-          reset={()=>resetSignupState()}
+          submit={createUser}
+          reset={resetSignupState}
           inputs={[{
             name: 'first',
             text: 'First',

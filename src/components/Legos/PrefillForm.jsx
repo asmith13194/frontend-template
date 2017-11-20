@@ -3,7 +3,7 @@ import PrefillInput from './PrefillInput.jsx';
 import RaisedButton from 'material-ui/RaisedButton';
 import { ValidatorForm } from 'react-form-validator-core';
 import { connect } from 'react-redux';
-import css from '../../styles/settings-css.js';
+import css from '../../styles/legos-css.js';
 
 class PrefillForm extends Component {
   constructor(props) {

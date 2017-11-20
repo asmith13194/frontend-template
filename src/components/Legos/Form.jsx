@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import TextInput from './TextInput.jsx';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { ValidatorForm } from 'react-form-validator-core';
-import css from '../../styles/landing-css.js';
+import css from '../../styles/legos-css.js';
 
 class LegoForm extends Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class LegoForm extends Component {
           label='Cancel'
           primary={true}
           style={css.buttons}
-          onClick={() => reset()}
+          onClick={() => {reset(); this.props.history.goBack();}}
         />
 
         <RaisedButton
@@ -75,4 +76,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, null, null)(LegoForm);
+export default withRouter(connect(mapStateToProps, null, null)(LegoForm));

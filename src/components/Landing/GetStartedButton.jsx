@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 import RaisedButton from 'material-ui/RaisedButton';
+import { withRouter } from 'react-router-dom';
 import css from '../../styles/landing-css.js';
 import {
   changeLoginViewState, } from '../../actions/actions.js';
@@ -20,7 +21,7 @@ class GetStartedButton extends Component {
 
         <RaisedButton
           label={'Get Started'}
-          onClick={changeLoginViewState}
+          onClick={() => {this.props.history.push('/login'); changeLoginViewState();}}
         />
 
       </div>
@@ -32,4 +33,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({changeLoginViewState}, dispatch);
 }
 
-export default connect(null, mapDispatchToProps, null)(GetStartedButton);
+export default withRouter(connect(null, mapDispatchToProps, null)(GetStartedButton));

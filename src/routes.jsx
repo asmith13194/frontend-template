@@ -15,6 +15,10 @@ export default (
 
       <Route exact path={'/'} component={LandingPage} />
 
+      <Route exact path={'/login'} component={LandingPage} />
+
+      <Route exact path={'/signup'} component={LandingPage} />
+
       <PrivateRoute path={'/home'} component={HomePage} />
 
       <PrivateRoute path={'/settings/account'} component={AccountSettings} />
@@ -26,6 +30,7 @@ export default (
       <Route component={NoMatch} />
 
     </Switch>
+
 
   </main>
 );

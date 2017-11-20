@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Nav from '../Nav/Bar.jsx';
-import css from '../../styles/homepage-css.js';
+import css from '../../styles/home-css.js';
 import Sidebar from './Sidebar.jsx';
 
 class HomePage extends Component {

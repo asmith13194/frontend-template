@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
-import css from '../../styles/landing-css.js';
 import Form from '../Legos/Form.jsx';
+import Dialog from 'material-ui/Dialog';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import css from '../../styles/landing-css.js';
+import RaisedButton from 'material-ui/RaisedButton';
 import validators from '../../validators/textinput.js';
 import {
   resetLoginState,
@@ -37,31 +37,42 @@ class LoginForm extends Component {
       changeLoginErrorState, } = this.props;
 
     const signup = () => {
+      this.props.history.push('/signup');
       resetLoginState();
       changeLoginViewState();
       changeSignupViewState();
     };
 
-    const loginUser = () => {
-      axios.post(`${process.env.REACT_APP_API}/auth/login`, {email: loginReducer.email, password: loginReducer.password})
+    const myInit = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      body: JSON.stringify({email: loginReducer.email, password: loginReducer.password})
+    };
+
+    const loginUser = async() => {
+      await fetch(`${process.env.REACT_APP_API}/auth/login`, myInit)
+      .then(response => response.json())
       .then(response => {
-         switch(response.data.success){
+        switch(response.success){
           case true:
-            localStorage.setItem('user', JSON.stringify(response.data.payload));
-            resetLoginState();
-            return;
+            localStorage.setItem('user', JSON.stringify(response.payload));
+            return resetLoginState();
           case false:
-            changeLoginErrorState(response.data.payload);
-            changeLoginPassword('');
-            return;
+            console.error(response.payload);
+            changeLoginErrorState(response.payload);
+            return changeLoginPassword('');
           default:
             return resetLoginState();
         }
       })
       .catch(error => {
-        changeLoginErrorState(error.detail);
-        changeLoginPassword('');
-        return;
+        console.error(error);
+        changeLoginErrorState('please try again');
+        return changeLoginPassword('');
       });
     };
 
@@ -129,4 +140,4 @@ function mapDispatchToProps(dispatch) {
     changeLoginErrorState, }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, null)(LoginForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps, null)(LoginForm));

@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {bindActionCreators} from 'redux';
 // import css from '../../../styles/settings-css.js';
-import axios from 'axios';
 import validators from '../../../validators/textinput.js';
 import Dialog from 'material-ui/Dialog';
 import Form from '../../Legos/Form.jsx';
 import {
   resetAccountSettingsState,
   changeAccountSettingsError,
-  changeAccountSettingsPasswordAuth,
-  changeAccountSettingsErrorViewState,
-  changeAccountSettingsWrongPasswordViewState, } from '../../../actions/actions.js';
+  changeAccountSettingsPasswordAuth, } from '../../../actions/actions.js';
 
 
 class AccountSettingsReviewDialog extends Component {
@@ -30,12 +27,11 @@ class AccountSettingsReviewDialog extends Component {
       accountSettingsReducer,
       resetAccountSettingsState,
       changeAccountSettingsError,
-      changeAccountSettingsPasswordAuth,
-      changeAccountSettingsErrorViewState,
-      changeAccountSettingsWrongPasswordViewState, } = this.props;
+      changeAccountSettingsPasswordAuth, } = this.props;
 
     const commands = {
       name: {
+        method: 'PUT',
         url: `${process.env.REACT_APP_API}/auth/update`,
         view: accountSettingsReducer.nameDialogView,
         text: 'If youre happy with the new name, please enter your password:',
@@ -43,6 +39,7 @@ class AccountSettingsReviewDialog extends Component {
         payload:{first: accountSettingsReducer.first, last: accountSettingsReducer.last}
       },
       email: {
+        method: 'PUT',
         url: `${process.env.REACT_APP_API}/auth/update`,
         view: accountSettingsReducer.emailDialogView,
         val: `Change email to ${accountSettingsReducer.email}`,
@@ -50,6 +47,7 @@ class AccountSettingsReviewDialog extends Component {
         payload:{email: accountSettingsReducer.email}
       },
       password: {
+        method: 'PUT',
         url: `${process.env.REACT_APP_API}/auth/update/password`,
         view: accountSettingsReducer.passwordDialogView,
         val: 'Change password',
@@ -57,6 +55,7 @@ class AccountSettingsReviewDialog extends Component {
         payload:{password: accountSettingsReducer.password}
       },
       deactivate: {
+        method: 'DELETE',
         url: `${process.env.REACT_APP_API}/auth/deactivate`,
         view: accountSettingsReducer.deactivateDialogView,
         text: 'If youre ready to deactivate your account, please enter your password:',
@@ -65,46 +64,43 @@ class AccountSettingsReviewDialog extends Component {
       },
     };
 
-    const submitChange = () => {
-      switch(accountSettingsReducer.wrongPasswordView){
-        case true:
-          changeAccountSettingsWrongPasswordViewState();
-          break;
-        default:
-          break;
-      }
-      switch(accountSettingsReducer.errorView){
-        case true:
-          changeAccountSettingsErrorViewState();
-          break;
-        default:
-          break;
-      }
-      axios.post(commands[type].url, {password: accountSettingsReducer.passwordAuth, payload: commands[type].payload, jwt: JSON.parse(localStorage.getItem('user')).jwt})
+    const myInit = {
+      method: commands[type].method,
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      mode: 'cors',
+      body: JSON.stringify({
+        password: accountSettingsReducer.passwordAuth,
+        payload: commands[type].payload,
+        jwt: JSON.parse(localStorage.getItem('user')).jwt
+      })
+    };
+
+    const submitChange = async() => {
+      await fetch(commands[type].url, myInit)
+      .then(response => response.json())
       .then(response => {
-        switch(response.data.success){
+        switch(response.success){
           case true:
             localStorage.removeItem('user');
-            localStorage.setItem('user', JSON.stringify(response.data.payload));
-            resetAccountSettingsState();
-            return;
+            localStorage.setItem('user', JSON.stringify(response.payload));
+            return resetAccountSettingsState();
           case false:
-            changeAccountSettingsError(response.data.payload);
-            changeAccountSettingsErrorViewState();
-            return;
+            console.error(response.payload);
+            return changeAccountSettingsError(response.payload);
           case 'deactivated':
             resetAccountSettingsState();
             localStorage.removeItem('user');
-            window.location.reload(true);
-            return;
+            return window.location.reload(true);
           default:
             return resetAccountSettingsState();
         }
       })
       .catch(error => {
-        changeAccountSettingsError(error.detail);
-        changeAccountSettingsErrorViewState();
-        return;
+        console.error(error);
+        return changeAccountSettingsError(error.detail);
       });
     };
 
@@ -118,9 +114,7 @@ class AccountSettingsReviewDialog extends Component {
 
         <p>{commands[type].text}</p>
 
-        {accountSettingsReducer.wrongPasswordView ? <p>wrong password</p> : null}
-        {accountSettingsReducer.errorView ? <p>{accountSettingsReducer.error}</p> : null}
-
+        {accountSettingsReducer.error === null ? <p>{accountSettingsReducer.error}</p> : null}
 
         <Form
           submitLabel={'Save'}
@@ -149,9 +143,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     resetAccountSettingsState,
     changeAccountSettingsError,
-    changeAccountSettingsPasswordAuth,
-    changeAccountSettingsErrorViewState,
-    changeAccountSettingsWrongPasswordViewState, }, dispatch);
+    changeAccountSettingsPasswordAuth, }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps, null)(AccountSettingsReviewDialog);

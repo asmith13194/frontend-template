@@ -2,7 +2,6 @@ module.exports = {
 
   navlogo: {
       height: '100%',
-      // padding: '.5em',
   },
 
   navmenu: {

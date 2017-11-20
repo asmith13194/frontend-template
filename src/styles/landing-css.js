@@ -17,7 +17,7 @@ module.exports = {
   },
 
   buttons: {
-    margin: '.5em',
+    margin: '.2em',
   },
 
   form: {

@@ -15,7 +15,6 @@ module.exports = {
 
   form: {
     overflow: 'visible',
-    // margin: 'auto',
     width: 'max-content'
   },
 
@@ -29,7 +28,7 @@ module.exports = {
   },
 
   buttons: {
-    margin: '.5em'
+    margin: '.2em'
   },
 
   dialog: {

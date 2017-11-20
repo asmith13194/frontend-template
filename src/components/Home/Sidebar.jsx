@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import css from '../../styles/homepage-css.js';
+import css from '../../styles/home-css.js';
 import { Link } from 'react-router-dom';
 import MenuItem from 'material-ui/MenuItem';
 
